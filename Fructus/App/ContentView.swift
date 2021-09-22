@@ -15,13 +15,14 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(fruits.shuffled()) { item in
-                    FruitRowView(fruit: item)
-                        .padding(.vertical, 4)
-                } //: Loop
+            List(fruits) { item in
+                    NavigationLink(destination: FruitDetailView(fruit: item)) {
+                        FruitRowView(fruit: item)
+                            .padding(.vertical, 4)
+                    }
             } //: List
             .navigationTitle("Fruits")
+            .listStyle(.plain)
         } //: Navigation
     } //: Body
 } //: Content view
