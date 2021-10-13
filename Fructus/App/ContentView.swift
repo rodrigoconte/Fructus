@@ -11,6 +11,8 @@ struct ContentView: View {
     
     // MARK: - Properties
     
+    @State private var isShowingSettings: Bool = false
+    
     var fruits: [Fruit] = fruitsData
     
     var body: some View {
@@ -22,6 +24,18 @@ struct ContentView: View {
                     }
             } //: List
             .navigationTitle("Fruits")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button {
+                        isShowingSettings = true
+                    } label: {
+                        Image(systemName: "slider.horizontal.3")
+                    } //: Button
+                    .sheet(isPresented: $isShowingSettings) {
+                        SettingsView()
+                    }
+                }
+            }
             .listStyle(.plain)
         } //: Navigation
     } //: Body
